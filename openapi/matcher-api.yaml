@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: matcher-api
+  version: 1.0.0
+  description: API for matching pastry suggestions based on flavor preferences.
+servers:
+  - url: http://localhost:8082
+paths:
+  /api/v1/suggestions:
+    get:
+      summary: Get pastry suggestions
+      operationId: suggestPastries
+      parameters:
+        - in: query
+          name: flavors
+          required: true
+          description: One to three flavor tags used for matching.
+          schema:
+            type: array
+            minItems: 1
+            maxItems: 3
+            items:
+              $ref: '#/components/schemas/FlavorTag'
+          style: form
+          explode: true
+      responses:
+        '200':
+          description: Ranked pastry suggestions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestionResponse'
+        '400':
+          description: Validation or query error
+components:
+  schemas:
+    SuggestionResponse:
+      type: object
+      required: [suggestions]
+      properties:
+        suggestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PastrySuggestion'
+    PastrySuggestion:
+      type: object
+      required:
+        [pastryId, pastryName, averageRating, ratingCount, overlappingFlavorCount, matchedFlavors]
+      properties:
+        pastryId:
+          $ref: '#/components/schemas/PastryId'
+        pastryName:
+          type: string
+        averageRating:
+          type: number
+          format: double
+        ratingCount:
+          type: integer
+        overlappingFlavorCount:
+          type: integer
+        matchedFlavors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlavorTag'
+    PastryId:
+      type: string
+      enum:
+        - STROOPWAFEL
+        - TOMPOUCE
+        - APPELFLAP
+        - CROISSANT
+        - PAIN_AU_CHOCOLAT
+        - CINNAMON_ROLL
+        - DONUT
+        - ECLAIR
+        - MUFFIN
+        - SCONE
+        - BAGEL
+        - CANNOLI
+        - STRUDEL
+        - BERLINER
+        - BANANA_BREAD
+        - CHEESE_DANISH
+        - PALMIER
+        - PASTEL_DE_NATA
+        - BAKLAVA
+        - CHOUX_BUN
+    FlavorTag:
+      type: string
+      enum:
+        - SWEET
+        - SALTY
+        - BUTTERY
+        - SPICED
+        - FRUITY
+        - CHOCOLATEY
+        - NUTTY
+        - VANILLA
+        - CARAMEL
+        - CITRUS
+        - CREAMY
+        - CRUNCHY

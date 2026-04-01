@@ -1,0 +1,27 @@
+### Submit a rating (ratings-api)
+POST http://localhost:8081/api/v1/ratings
+Content-Type: application/json
+
+{
+  "pastryId": "STROOPWAFEL",
+  "userId": "user-01",
+  "score": 5,
+  "flavors": ["CARAMEL", "BUTTERY"],
+  "experience": "A perfect coffee companion with chewy caramel layers."
+}
+
+### Submit another quick rating for same pastry (used in debugging exercise)
+POST http://localhost:8081/api/v1/ratings
+Content-Type: application/json
+
+{
+  "pastryId": "STROOPWAFEL",
+  "userId": "user-02",
+  "score": 2,
+  "flavors": ["SWEET"],
+  "experience": "Too sweet for me today."
+}
+
+### Get flavor-based suggestions (matcher-api)
+GET http://localhost:8082/api/v1/suggestions?flavors=CARAMEL&flavors=BUTTERY&flavors=CRUNCHY
+Accept: application/json

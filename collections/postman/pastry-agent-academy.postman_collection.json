@@ -1,0 +1,55 @@
+{
+  "info": {
+    "name": "Pastry Agent Academy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Requests for ratings-api and matcher-api baseline flows."
+  },
+  "item": [
+    {
+      "name": "Submit Rating",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/ratings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["api", "v1", "ratings"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pastryId\": \"TOMPOUCE\",\n  \"userId\": \"user-08\",\n  \"score\": 4,\n  \"flavors\": [\"CREAMY\", \"SWEET\"],\n  \"experience\": \"Great layers and a smooth filling.\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Suggestions",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8082/api/v1/suggestions?flavors=CREAMY&flavors=SWEET",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "suggestions"],
+          "query": [
+            {
+              "key": "flavors",
+              "value": "CREAMY"
+            },
+            {
+              "key": "flavors",
+              "value": "SWEET"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: ratings-api
+  version: 1.0.0
+  description: API for submitting pastry ratings that are published as Kafka events.
+servers:
+  - url: http://localhost:8081
+paths:
+  /api/v1/ratings:
+    post:
+      summary: Submit a pastry rating
+      operationId: submitRating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingSubmissionRequest'
+      responses:
+        '202':
+          description: Rating accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingAcceptedResponse'
+        '400':
+          description: Validation error
+components:
+  schemas:
+    RatingSubmissionRequest:
+      type: object
+      required: [pastryId, userId, score, flavors, experience]
+      properties:
+        pastryId:
+          $ref: '#/components/schemas/PastryId'
+        userId:
+          type: string
+          minLength: 1
+        score:
+          type: integer
+          minimum: 1
+          maximum: 5
+        flavors:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            $ref: '#/components/schemas/FlavorTag'
+        experience:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    RatingAcceptedResponse:
+      type: object
+      required: [eventId, acceptedAt, message]
+      properties:
+        eventId:
+          type: string
+          format: uuid
+        acceptedAt:
+          type: string
+          format: date-time
+        message:
+          type: string
+    PastryId:
+      type: string
+      enum:
+        - STROOPWAFEL
+        - TOMPOUCE
+        - APPELFLAP
+        - CROISSANT
+        - PAIN_AU_CHOCOLAT
+        - CINNAMON_ROLL
+        - DONUT
+        - ECLAIR
+        - MUFFIN
+        - SCONE
+        - BAGEL
+        - CANNOLI
+        - STRUDEL
+        - BERLINER
+        - BANANA_BREAD
+        - CHEESE_DANISH
+        - PALMIER
+        - PASTEL_DE_NATA
+        - BAKLAVA
+        - CHOUX_BUN
+    FlavorTag:
+      type: string
+      enum:
+        - SWEET
+        - SALTY
+        - BUTTERY
+        - SPICED
+        - FRUITY
+        - CHOCOLATEY
+        - NUTTY
+        - VANILLA
+        - CARAMEL
+        - CITRUS
+        - CREAMY
+        - CRUNCHY
