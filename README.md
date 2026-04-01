@@ -1,32 +1,68 @@
 # Java Coding Agent Academy
 
-A hands-on training repository for Java consultants to practice coding-agent workflows on a realistic, event-driven baseline.
+Hi there!
 
-## Assignment
+This is our FreshMinds Coding Agent Academy. This repository contains a bunch of exercises to get you familiar with the basics of coding-agent workflows.
 
-The baseline on `main` is intentionally designed as the source world for exercises:
+This particular repository focuses on the Software Unit, which is why it is written in **Java**. But the good part is: with Coding Agents, it makes less and less of a difference whether you're fluent in Java, Python, .NET, Rust, or any other language.
 
-- Two Spring Boot 3 services (`Java 21`, `Maven`):
-  - `ratings-api`: accepts pastry ratings, validates input, and publishes rating events to Kafka.
-  - `matcher-api`: consumes rating events, persists data in MySQL, and returns pastry suggestions.
-- OpenAPI-first contracts are stored in `openapi/` and are the API source of truth.
-- Docker Compose provides local Kafka + MySQL infrastructure.
-- A medium seed dataset is included (20 pastries, 15 users, 1-10 ratings per pastry).
-- Controlled pastry and flavor enums are used end to end.
+If you have any questions or suggestions, please reach out to one of the Principals: Christophe Keteleer, Jeroen Rosenberg or Roy de Bokx.
 
-### Required baseline bug (intentional)
+## Assignments
 
-For Exercise 01, `main` intentionally contains an ordering defect:
+**Important**: Fork this repository to your own GH account before you start on anything. This is to avoid this repo getting cluttered with everyone's solutions. It is up to you to make this a public or private repo in your own account; this repo doesn't have to be a secret. 
 
-- Producer in `ratings-api` publishes events **without a pastry-based Kafka key**.
-- This means per-pastry ordering is not guaranteed.
-- In quick successive updates, the persisted "last review" in `matcher-api` can become stale.
+We have structured this repo as follows:
 
-Do not "pre-fix" this on `main`; the debugging exercise starts from this defect.
+* In this `main` branch, you will find the baseline applications as well as these general instructions.
+* We have XXX (TODO) assignments lined up for you as listed below. For each assignment, you'll find:
+  * A branch containing the assignment, for instance (TODO). This branch contains the code that you'll need (usually the same baseline application) and a Readme describing the exercise.
+  * A branch containing the solution, for instance (TODO). This contains the solution in terms of generated output, as well as an example of the prompt that we used to generate the solution. You can use it to compare you own solution with ours.
+* As a finishing touch, if you think you truly master Agentic Coding, we've kept a nice capstone assignment for you to complete: Vibecode your own training repo. You can find this in the branch (TODO). Obviously, our solution to this assignment is right before you.
+* For the curious: we keep the planning files and prompts (where possible) in the `plans` branch.
 
-## Run Locally
+We have gathered the following exercises:
 
-1. Start infra:
+TODO
+
+### Getting started
+
+* Pick your weapon of choice: Claude Code, ChatGPT Codex, Junie, or any other coding agent. Make sure you have your Coding Agent installed and ready.
+* **Fork this repository to your own GH account, including all branches.** Clone your fork to your local machine.
+* Get familiar with the baseline application (see below).
+* Checkout the exercise branch you want to work on and follow the instructions.
+
+## FreshMinds Pastry Platform
+
+This training app simulates a tiny pastry recommendation platform with two cooperating services:
+
+- `ratings-api` accepts pastry reviews from users. Each review contains a pastry identifier, a 1-5 score, up to 3 flavor tags, and free-text experience notes.
+- `matcher-api` consumes these rating events, stores them in MySQL, and returns pastry suggestions based on requested flavors.
+
+Functional use case covered:
+
+- A user rates pastries they tried ("loved the caramel crunch", "too sweet today", etc.).
+- Another user asks for suggestions using one to three flavors.
+- The platform returns pastries that match at least one requested flavor.
+- Results are ranked by:
+  1. average rating (primary)
+  2. number of overlapping flavors (secondary)
+
+In short: this baseline models a realistic "ingest events -> materialize read model -> query ranked suggestions" workflow, but keeps the business domain playful and approachable for agent practice.
+
+Tech stack at a glance:
+
+- Java 21 + Spring Boot 3
+- Maven multi-module setup
+- Apache Kafka for async event flow
+- MySQL + Spring Data JPA for persistence
+- OpenAPI contracts in `openapi/`
+- Docker Compose for local infrastructure
+
+
+### Run Locally
+
+1. Start kafka and MySQL:
    ```bash
    docker compose up -d
    ```
@@ -34,44 +70,10 @@ Do not "pre-fix" this on `main`; the debugging exercise starts from this defect.
    ```bash
    mvn -pl matcher-api spring-boot:run
    ```
-3. Start ratings service (new terminal):
+3. Start ratings service:
    ```bash
    mvn -pl ratings-api spring-boot:run
    ```
-4. Use request collections:
+4. Send a request using one of the request collections:
    - IntelliJ HTTP client: `collections/intellij/http-requests.http`
    - Postman collection: `collections/postman/pastry-agent-academy.postman_collection.json`
-
-## Branch Structure
-
-Participants should **fork first** and work in their own fork.
-
-- `main`
-  - Baseline implementation used as the starting point for all exercises.
-- `plans`
-  - Planning-only branch that contains exercise planning documents (`01-overall-plan.md`, `02-...`, etc.).
-  - These plan files intentionally stay out of `main`.
-- `exercise/NN-topic`
-  - Exercise branch for assignment `NN`.
-  - Always branched from `main`.
-- `solution/NN-topic`
-  - Matching solution branch for each exercise.
-  - Branched from the corresponding `exercise/NN-topic` branch.
-- `exercise/99-vibing-assignment`
-  - Capstone branch where participants create a new training repo.
-- `solution/99-vibing-assignment`
-  - Capstone solution branch.
-
-### Exercise Order
-
-1. Debugging code
-2. Javadoc
-3. IDE code completion (IntelliJ + VS Code)
-4. Unit + integration tests
-5. Code review
-6. Refactoring
-7. Repetitive task automation
-8. Skills/playbooks
-9. CI pipeline creation
-10. Feature implementation (plan-first)
-99. Capstone vibing assignment

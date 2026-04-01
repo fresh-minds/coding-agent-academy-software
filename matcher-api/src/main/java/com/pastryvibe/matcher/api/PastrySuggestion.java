@@ -10,7 +10,7 @@ public record PastrySuggestion(
         String pastryName,
         double averageRating,
         int ratingCount,
-        int overlappingFlavorCount,
-        List<FlavorTag> matchedFlavors
+        List<FlavorTag> matchedFlavors,
+        String lastReviewDescription
 ) {
 }

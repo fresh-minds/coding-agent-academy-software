@@ -45,7 +45,7 @@ components:
     PastrySuggestion:
       type: object
       required:
-        [pastryId, pastryName, averageRating, ratingCount, overlappingFlavorCount, matchedFlavors]
+        [pastryId, pastryName, averageRating, ratingCount, matchedFlavors]
       properties:
         pastryId:
           $ref: '#/components/schemas/PastryId'
@@ -56,12 +56,13 @@ components:
           format: double
         ratingCount:
           type: integer
-        overlappingFlavorCount:
-          type: integer
         matchedFlavors:
           type: array
           items:
             $ref: '#/components/schemas/FlavorTag'
+        lastReviewDescription:
+          type: string
+          nullable: true
     PastryId:
       type: string
       enum:

@@ -52,10 +52,10 @@ public class SuggestionService {
 
         List<PastrySuggestion> suggestions = pastryRepository.findAll().stream()
                 .map(pastry -> buildSuggestion(pastry, requestSet, statsByPastry.get(pastry.getPastryId())))
-                .filter(candidate -> candidate.overlappingFlavorCount() > 0)
+                .filter(candidate -> !candidate.matchedFlavors().isEmpty())
                 .sorted(
                         Comparator.comparingDouble(PastrySuggestion::averageRating).reversed()
-                                .thenComparingInt(PastrySuggestion::overlappingFlavorCount).reversed()
+                                .thenComparingInt(candidate -> candidate.matchedFlavors().size()).reversed()
                                 .thenComparing(PastrySuggestion::pastryName)
                 )
                 .toList();
@@ -79,8 +79,8 @@ public class SuggestionService {
                 pastry.getDisplayName(),
                 stats == null ? 0.0 : stats.getAverageScore(),
                 stats == null ? 0 : stats.getRatingCount(),
-                matched.size(),
-                matched
+                matched,
+                stats == null ? null : stats.getLastReviewExperience()
         );
     }
 }

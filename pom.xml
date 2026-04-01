@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <name>Agent Bakery Academy</name>
-    <description>Training repository for Java consultants learning coding agent workflows.</description>
+    <description>Training repository for FreshMinds consultants of the Software Unit learning coding agent workflows.</description>
 
     <modules>
         <module>ratings-api</module>
