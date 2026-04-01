@@ -23,6 +23,24 @@ Create an agent-agnostic, Java-only training repository for consultants to pract
 - Controlled pastry/flavor enums.
 - Baseline is runnable but intentionally imperfect for training.
 
+## Interview Decisions (Locked for Baseline Implementation)
+- **Rating payload fields:** `score` (1-5 stars), `flavors` (list of controlled flavor enums, max 3), `experience` (free-text field).
+- **Pastry identifiers:** controlled enum list with 20 supported pastries, including Dutch pastries such as `STROOPWAFEL`, `TOMPOUCE`, and `APPELFLAP`, plus additional default pastries.
+- **Suggestion behavior (`matcher-api`):**
+  - Request includes up to 3 flavors.
+  - Return pastries that match at least 1 requested flavor.
+  - Ranking order:
+    1. Average rating (primary, descending).
+    2. Number of overlapping flavors (secondary, descending).
+- **Persisted "last review" model:** per pastry, persist latest review details including score, flavors, free-text experience, and review metadata.
+- **OpenAPI:** create contracts in repository (OpenAPI-first is source of truth).
+- **Data model:** clean v1 MySQL schema closely aligned with OpenAPI models.
+- **Kafka defaults:** topic names, partition count, and consumer group names can be chosen during implementation; message format is JSON; no retry flow for baseline.
+- **Security:** no authentication in baseline (`main`); potential auth extension belongs to later feature exercise.
+- **Seed dataset size:** 20 pastries, 15 users, and 1-10 ratings per pastry.
+- **HTTP tooling:** provide both Postman collection and IntelliJ HTTP client requests.
+- **Tech stack posture:** keep dependencies and architecture minimal.
+
 ## Required Baseline Bug (for Exercise 01)
 - Introduce an out-of-order event bug in `main`.
 - Cause: Kafka producer publishes rating events **without pastry-based key**.
@@ -63,6 +81,7 @@ Create an agent-agnostic, Java-only training repository for consultants to pract
 - No external runtime LLM dependency in the Java services.
 - Integration test style: service-level tests with Testcontainers (Kafka + MySQL), not full dual-service E2E tests.
 - CI is introduced as a dedicated exercise (create-only), not in initial baseline.
+- Heavy test expansion remains scoped to **Exercise 04** (tests), while **Exercise 05** remains code review.
 
 ## Plan Files in This Branch
 - `01-overall-plan.md` (this file)
