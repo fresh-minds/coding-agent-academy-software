@@ -1,5 +1,8 @@
 package com.pastryvibe.matcher.domain;
 
+/**
+ * Controlled pastry identifiers mirrored by the matcher service.
+ */
 public enum PastryId {
     STROOPWAFEL,
     TOMPOUCE,

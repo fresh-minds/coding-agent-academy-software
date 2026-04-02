@@ -24,6 +24,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Seeds a repeatable baseline dataset for local runs and exercise walkthroughs.
+ */
 @Component
 public class BaselineDataSeeder implements CommandLineRunner {
 
@@ -41,6 +44,11 @@ public class BaselineDataSeeder implements CommandLineRunner {
         this.pastryStatsRepository = pastryStatsRepository;
     }
 
+    /**
+     * Populates the baseline pastry, rating, and stats data if the database is empty.
+     *
+     * @param args command-line arguments supplied by Spring Boot
+     */
     @Override
     @Transactional
     public void run(String... args) {
@@ -87,6 +95,12 @@ public class BaselineDataSeeder implements CommandLineRunner {
         }
     }
 
+    /**
+     * Picks a small distinct flavor set for seeded ratings.
+     *
+     * @param random deterministic random source used for repeatable seeds
+     * @return one to three unique flavors
+     */
     private Set<FlavorTag> randomFlavors(Random random) {
         FlavorTag[] allFlavors = FlavorTag.values();
         int pickCount = 1 + random.nextInt(3);
@@ -97,6 +111,11 @@ public class BaselineDataSeeder implements CommandLineRunner {
         return picked;
     }
 
+    /**
+     * Rebuilds the aggregate statistics for one seeded pastry from its ratings.
+     *
+     * @param pastryId pastry identifier to recompute
+     */
     private void recomputeStats(String pastryId) {
         List<PastryRatingEntity> ratings = pastryRatingRepository.findByPastryId(pastryId);
         if (ratings.isEmpty()) {
@@ -119,6 +138,12 @@ public class BaselineDataSeeder implements CommandLineRunner {
         pastryStatsRepository.save(stats);
     }
 
+    /**
+     * Converts an enum-style pastry id into a display label.
+     *
+     * @param pastryId pastry identifier in uppercase underscore form
+     * @return human-readable display name
+     */
     private String humanize(String pastryId) {
         return Arrays.stream(pastryId.split("_"))
                 .map(fragment -> Character.toUpperCase(fragment.charAt(0)) + fragment.substring(1).toLowerCase())

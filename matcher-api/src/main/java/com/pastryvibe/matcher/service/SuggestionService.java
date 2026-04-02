@@ -21,6 +21,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Builds pastry suggestions from the current ratings and derived statistics.
+ */
 @Service
 public class SuggestionService {
 
@@ -38,6 +41,12 @@ public class SuggestionService {
         this.pastryStatsRepository = pastryStatsRepository;
     }
 
+    /**
+     * Returns all pastries that match at least one requested flavor.
+     *
+     * @param requestedFlavors requested flavor tags, limited to one through three entries
+     * @return suggestions ordered by rating and flavor overlap
+     */
     public SuggestionResponse suggest(List<FlavorTag> requestedFlavors) {
         if (requestedFlavors == null || requestedFlavors.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "At least one flavor must be supplied.");
@@ -63,6 +72,14 @@ public class SuggestionService {
         return new SuggestionResponse(suggestions);
     }
 
+    /**
+     * Combines pastry metadata, matching flavors, and stored statistics into a response item.
+     *
+     * @param pastry pastry entity to enrich
+     * @param requestSet requested flavors for matching
+     * @param stats derived statistics for the pastry, if present
+     * @return suggestion payload for the pastry
+     */
     private PastrySuggestion buildSuggestion(PastryEntity pastry, Set<FlavorTag> requestSet, PastryStatsEntity stats) {
         Set<FlavorTag> pastryFlavors = pastryRatingRepository.findByPastryId(pastry.getPastryId()).stream()
                 .map(PastryRatingEntity::getFlavors)

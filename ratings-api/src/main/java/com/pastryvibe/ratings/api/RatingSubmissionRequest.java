@@ -11,6 +11,12 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+/**
+ * Validated request payload for submitting a pastry rating.
+ *
+ * The request is intentionally constrained so the services only accept known pastries,
+ * a bounded number of flavors, and a short free-text experience field.
+ */
 public record RatingSubmissionRequest(
         @NotNull PastryId pastryId,
         @NotBlank String userId,

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Accepts pastry rating submissions and queues them for matching.
+ */
 @RestController
 @RequestMapping("/api/v1/ratings")
 public class RatingController {
@@ -22,6 +25,12 @@ public class RatingController {
         this.ratingPublisherService = ratingPublisherService;
     }
 
+    /**
+     * Accepts a validated rating submission and returns a 202 response with the generated event id.
+     *
+     * @param request validated rating payload from the client
+     * @return response describing the accepted submission
+     */
     @PostMapping
     public ResponseEntity<RatingAcceptedResponse> submitRating(@Valid @RequestBody RatingSubmissionRequest request) {
         UUID eventId = ratingPublisherService.publish(request);

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Exposes the pastry suggestion endpoint used by the matcher API.
+ */
 @RestController
 @RequestMapping("/api/v1/suggestions")
 @Validated
@@ -22,6 +25,12 @@ public class SuggestionController {
         this.suggestionService = suggestionService;
     }
 
+    /**
+     * Returns pastry suggestions for up to three requested flavors.
+     *
+     * @param flavors requested flavor tags from the client
+     * @return ordered suggestion list
+     */
     @GetMapping
     public SuggestionResponse suggest(
             @RequestParam("flavors") @Size(max = 3) List<FlavorTag> flavors

@@ -5,6 +5,9 @@ import com.pastryvibe.matcher.domain.PastryId;
 
 import java.util.List;
 
+/**
+ * Single pastry entry returned by the matcher service.
+ */
 public record PastrySuggestion(
         PastryId pastryId,
         String pastryName,

@@ -4,6 +4,9 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Kafka event produced by the ratings API and consumed by the matcher service.
+ */
 public record RatingEvent(
         UUID eventId,
         PastryId pastryId,

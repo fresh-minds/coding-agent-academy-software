@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Maps rating submissions to Kafka events.
+ */
 @Service
 public class RatingPublisherService {
 
@@ -23,6 +26,12 @@ public class RatingPublisherService {
         this.ratingsTopic = ratingsTopic;
     }
 
+    /**
+     * Creates a new rating event and publishes it to the ratings topic.
+     *
+     * @param request validated rating submission
+     * @return generated id of the published event
+     */
     public UUID publish(RatingSubmissionRequest request) {
         RatingEvent event = new RatingEvent(
                 UUID.randomUUID(),

@@ -1,5 +1,8 @@
 package com.pastryvibe.ratings.domain;
 
+/**
+ * Controlled pastry identifiers accepted by the ratings API.
+ */
 public enum PastryId {
     STROOPWAFEL,
     TOMPOUCE,
