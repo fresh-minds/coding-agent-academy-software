@@ -34,8 +34,7 @@ public class RatingPublisherService {
                 Instant.now()
         );
 
-        // Intentionally flawed for Exercise 01: no pastry-based message key is used.
-        kafkaTemplate.send(ratingsTopic, event);
+        kafkaTemplate.send(ratingsTopic, request.pastryId().name(), event);
         return event.eventId();
     }
 }
