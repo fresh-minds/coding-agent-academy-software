@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class RatingIngestionService {
 
+    private final PastryNameFormatter pastryNameFormatter = new PastryNameFormatter();
     private final PastryRepository pastryRepository;
     private final PastryRatingRepository pastryRatingRepository;
     private final PastryStatsRepository pastryStatsRepository;
@@ -39,7 +40,10 @@ public class RatingIngestionService {
         }
 
         pastryRepository.findById(event.pastryId().name())
-                .orElseGet(() -> pastryRepository.save(new PastryEntity(event.pastryId().name(), humanize(event.pastryId().name()))));
+                .orElseGet(() -> pastryRepository.save(new PastryEntity(
+                        event.pastryId().name(),
+                        pastryNameFormatter.humanize(event.pastryId().name())
+                )));
 
         PastryRatingEntity rating = new PastryRatingEntity();
         rating.setEventId(event.eventId().toString());
@@ -72,11 +76,5 @@ public class RatingIngestionService {
         stats.setLastReviewFlavors(incomingEvent.flavors().stream().map(Enum::name).collect(Collectors.joining(",")));
 
         pastryStatsRepository.save(stats);
-    }
-
-    private String humanize(String pastryId) {
-        return java.util.Arrays.stream(pastryId.split("_"))
-                .map(fragment -> Character.toUpperCase(fragment.charAt(0)) + fragment.substring(1).toLowerCase())
-                .collect(Collectors.joining(" "));
     }
 }

@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
@@ -27,6 +26,7 @@ import java.util.stream.Collectors;
 @Component
 public class BaselineDataSeeder implements CommandLineRunner {
 
+    private final PastryNameFormatter pastryNameFormatter = new PastryNameFormatter();
     private final PastryRepository pastryRepository;
     private final PastryRatingRepository pastryRatingRepository;
     private final PastryStatsRepository pastryStatsRepository;
@@ -65,7 +65,10 @@ public class BaselineDataSeeder implements CommandLineRunner {
 
         Instant cursor = Instant.now().minus(14, ChronoUnit.DAYS);
         for (PastryId pastryId : PastryId.values()) {
-            pastryRepository.save(new PastryEntity(pastryId.name(), humanize(pastryId.name())));
+            pastryRepository.save(new PastryEntity(
+                    pastryId.name(),
+                    pastryNameFormatter.humanize(pastryId.name())
+            ));
 
             int ratingCount = 1 + random.nextInt(10);
             for (int i = 0; i < ratingCount; i++) {
@@ -117,11 +120,5 @@ public class BaselineDataSeeder implements CommandLineRunner {
         stats.setLastReviewExperience(lastReview.getExperience());
         stats.setLastReviewFlavors(lastReview.getFlavors().stream().map(Enum::name).collect(Collectors.joining(",")));
         pastryStatsRepository.save(stats);
-    }
-
-    private String humanize(String pastryId) {
-        return Arrays.stream(pastryId.split("_"))
-                .map(fragment -> Character.toUpperCase(fragment.charAt(0)) + fragment.substring(1).toLowerCase())
-                .collect(Collectors.joining(" "));
     }
 }
