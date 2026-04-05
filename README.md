@@ -1,9 +1,3 @@
-# Exercise 03: IDE Code Completion
+# Solution 03: IDE Code Completion
 
-Full project context lives on [`main`](../../tree/main).
-
-Complete `PastryNameFormatter#humanize` in `matcher-api` using your IDE agent/completion flow. Keep the implementation small, readable, and consistent with the existing codebase.
-
-Use IntelliJ or VS Code to prompt your in-IDE agent to finish the TODO method, then verify the project still builds.
-
-Reference solution: [`solution/03-ide-code-completion`](../../tree/solution/03-ide-code-completion)
+Implemented `PastryNameFormatter#humanize` so enum-style pastry names are converted into readable display names such as `STROOPWAFEL -> Stroopwafel` and `APPLE_TURNOVER -> Apple Turnover`.
