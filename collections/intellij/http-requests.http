@@ -25,3 +25,7 @@ Content-Type: application/json
 ### Get flavor-based suggestions (matcher-api)
 GET http://localhost:8082/api/v1/suggestions?flavors=CARAMEL&flavors=BUTTERY&flavors=CRUNCHY
 Accept: application/json
+
+### Get best rated pastry of all time (matcher-api)
+GET http://localhost:8082/api/v1/pastries/best-rated
+Accept: application/json

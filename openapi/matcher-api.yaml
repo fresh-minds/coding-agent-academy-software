@@ -32,6 +32,19 @@ paths:
                 $ref: '#/components/schemas/SuggestionResponse'
         '400':
           description: Validation or query error
+  /api/v1/pastries/best-rated:
+    get:
+      summary: Get the best rated pastry of all time
+      operationId: getBestRatedPastry
+      responses:
+        '200':
+          description: Best rated pastry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BestRatedPastryResponse'
+        '404':
+          description: No rated pastry found
 components:
   schemas:
     SuggestionResponse:
@@ -60,6 +73,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FlavorTag'
+        lastReviewDescription:
+          type: string
+          nullable: true
+    BestRatedPastryResponse:
+      type: object
+      required:
+        [pastryId, pastryName, averageRating, ratingCount]
+      properties:
+        pastryId:
+          $ref: '#/components/schemas/PastryId'
+        pastryName:
+          type: string
+        averageRating:
+          type: number
+          format: double
+        ratingCount:
+          type: integer
         lastReviewDescription:
           type: string
           nullable: true

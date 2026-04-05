@@ -50,6 +50,19 @@
           ]
         }
       }
+    },
+    {
+      "name": "Get Best Rated Pastry",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8082/api/v1/pastries/best-rated",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "pastries", "best-rated"]
+        }
+      }
     }
   ]
 }
