@@ -23,7 +23,17 @@ We have structured this repo as follows:
 
 We have gathered the following exercises:
 
-TODO
+* [Exercise 01: Debugging](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/01-debugging)
+* [Exercise 02: Javadoc](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/02-javadoc)
+* [Exercise 03: IDE Code Completion](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/03-ide-code-completion)
+* [Exercise 04: Tests](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/04-tests)
+* [Exercise 05: Code Review](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/05-code-review)
+* [Exercise 06: Refactoring](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/06-refactoring)
+* [Exercise 07: Repetitive Tasks](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/07-repetitive-tasks)
+* [Exercise 08: Skills and Playbooks](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/08-skills-playbooks)
+* [Exercise 09: CI Pipeline Creation](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/09-ci-pipeline-creation)
+* [Exercise 10: Feature Implementation (Plan-First)](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/10-feature-implementation-plan-first)
+* [Exercise 99: Vibing Assignment](https://github.com/fresh-minds/coding-agent-academy-software/tree/exercise/99-vibing-assignment)
 
 ### Getting started
 
