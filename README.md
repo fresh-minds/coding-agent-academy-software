@@ -1,79 +1,51 @@
-# Java Coding Agent Academy
+# Exercise 10: Feature Implementation (Plan-First)
 
-Hi there!
+Use this branch to practice a plan-first feature implementation workflow with a Coding Agent.
 
-This is our FreshMinds Coding Agent Academy. This repository contains a bunch of exercises to get you familiar with the basics of coding-agent workflows.
+For the full project context, baseline application, and general repository instructions, see the [`main` branch](https://github.com/<your-fork-or-origin>/coding-agent-academy-software/tree/main).
 
-This particular repository focuses on the Software Unit, which is why it is written in **Java**. But the good part is: with Coding Agents, it makes less and less of a difference whether you're fluent in Java, Python, .NET, Rust, or any other language.
+When you are done, compare your result with the matching solution branch: `solution/10-feature-implementation-plan-first`.
 
-If you have any questions or suggestions, please reach out to one of the Principals: Christophe Keteleer, Jeroen Rosenberg or Roy de Bokx.
+This branch contains the assignment only. It does not contain the implementation of the feature described below.
 
-## Assignments
+## Assignment
 
-**Important**: Fork this repository to your own GH account before you start on anything. This is to avoid this repo getting cluttered with everyone's solutions. It is up to you to make this a public or private repo in your own account; this repo doesn't have to be a secret. 
+Implement a new endpoint in `matcher-api` that returns the "Best pastry of all time".
 
-We have structured this repo as follows:
+The endpoint should determine the best pastry using the ratings data already stored in the matcher service database. The result should reflect the pastry that has been rated best so far.
 
-* In this `main` branch, you will find the baseline applications as well as these general instructions.
-* We have XXX (TODO) assignments lined up for you as listed below. For each assignment, you'll find:
-  * A branch containing the assignment, for instance (TODO). This branch contains the code that you'll need (usually the same baseline application) and a Readme describing the exercise.
-  * A branch containing the solution, for instance (TODO). This contains the solution in terms of generated output, as well as an example of the prompt that we used to generate the solution. You can use it to compare you own solution with ours.
-* As a finishing touch, if you think you truly master Agentic Coding, we've kept a nice capstone assignment for you to complete: Vibecode your own training repo. You can find this in the branch (TODO). Obviously, our solution to this assignment is right before you.
-* For the curious: we keep the planning files and prompts (where possible) in the `plans` branch.
+Before coding, first work with your Coding Agent to create a decision-complete implementation plan. Only then move on to implementation and verification.
 
-We have gathered the following exercises:
+TIP: instruct your Coding Agent to spin up a subagent afterwards to review the implementation that it generated.
 
-TODO
+## API Contract
 
-### Getting started
+### Request
 
-* Pick your weapon of choice: Claude Code, ChatGPT Codex, Junie, or any other coding agent. Make sure you have your Coding Agent installed and ready.
-* **Fork this repository to your own GH account, including all branches.** Clone your fork to your local machine.
-* Get familiar with the baseline application (see below).
-* Checkout the exercise branch you want to work on and follow the instructions.
+`GET /api/v1/pastries/best-rated`
 
-## FreshMinds Pastry Platform
+### Response
 
-This training app simulates a tiny pastry recommendation platform with two cooperating services:
+`200 OK`
 
-- `ratings-api` accepts pastry reviews from users. Each review contains a pastry identifier, a 1-5 score, up to 3 flavor tags, and free-text experience notes.
-- `matcher-api` consumes these rating events, stores them in MySQL, and returns pastry suggestions based on requested flavors.
+```json
+{
+  "pastryId": "STROOPWAFEL",
+  "pastryName": "Stroopwafel",
+  "averageRating": 4.7,
+  "ratingCount": 9,
+  "lastReviewDescription": "Great texture and balanced sweetness."
+}
+```
 
-Functional use case covered:
+`404 Not Found`
 
-- A user rates pastries they tried ("loved the caramel crunch", "too sweet today", etc.).
-- Another user asks for suggestions using one to three flavors.
-- The platform returns pastries that match at least one requested flavor.
-- Results are ranked by:
-  1. average rating (primary)
-  2. number of overlapping flavors (secondary)
+Return `404` when no pastry has been rated yet.
 
-In short: this baseline models a realistic "ingest events -> materialize read model -> query ranked suggestions" workflow, but keeps the business domain playful and approachable for agent practice.
+## Functional Requirements
 
-Tech stack at a glance:
-
-- Java 21 + Spring Boot 3
-- Maven multi-module setup
-- Apache Kafka for async event flow
-- MySQL + Spring Data JPA for persistence
-- OpenAPI contracts in `openapi/`
-- Docker Compose for local infrastructure
-
-
-### Run Locally
-
-1. Start kafka and MySQL:
-   ```bash
-   docker compose up -d
-   ```
-2. Start matcher service:
-   ```bash
-   mvn -pl matcher-api spring-boot:run
-   ```
-3. Start ratings service:
-   ```bash
-   mvn -pl ratings-api spring-boot:run
-   ```
-4. Send a request using one of the request collections:
-   - IntelliJ HTTP client: `collections/intellij/http-requests.http`
-   - Postman collection: `collections/postman/pastry-agent-academy.postman_collection.json`
+- The new endpoint must live in `matcher-api`.
+- The result must be based on ratings data stored in the matcher service database.
+- The endpoint must return the best-rated pastry so far.
+- The response must include `pastryId`, `pastryName`, `averageRating`, `ratingCount`, and `lastReviewDescription`.
+- Include unit tests for the new endpoint.
