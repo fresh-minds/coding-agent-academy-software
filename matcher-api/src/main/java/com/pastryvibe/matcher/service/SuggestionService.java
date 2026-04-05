@@ -55,7 +55,10 @@ public class SuggestionService {
                 .filter(candidate -> !candidate.matchedFlavors().isEmpty())
                 .sorted(
                         Comparator.comparingDouble(PastrySuggestion::averageRating).reversed()
-                                .thenComparingInt(candidate -> candidate.matchedFlavors().size()).reversed()
+                                .thenComparing(
+                                        Comparator.comparingInt((PastrySuggestion candidate) -> candidate.matchedFlavors().size())
+                                                .reversed()
+                                )
                                 .thenComparing(PastrySuggestion::pastryName)
                 )
                 .toList();
