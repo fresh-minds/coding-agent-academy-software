@@ -10,7 +10,7 @@ If you have any questions or suggestions, please reach out to one of the Princip
 
 ## Assignments
 
-**Important**: Fork this repository to your own GH account before you start on anything. This is to avoid this repo getting cluttered with everyone's solutions. It is up to you to make this a public or private repo in your own account; this repo doesn't have to be a secret. 
+**Important**: Fork this repository to your own GH account before you start on anything. This is to avoid this repo getting cluttered with everyone's solutions. 
 
 We have structured this repo as follows:
 
