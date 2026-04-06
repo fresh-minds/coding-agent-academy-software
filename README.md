@@ -1,8 +1,8 @@
 # Exercise 08 - Skills and Playbooks
 
-This branch contains Exercise 08 of the Java Coding Agent Academy. For the full repository context and baseline project, start from [`main`](https://github.com/rdebokx/coding-agent-academy-software/tree/main).
+This branch contains Exercise 08 of the Java Coding Agent Academy. For the full repository context and baseline project, start from [`main`](https://github.com/fresh-minds/coding-agent-academy-software/tree/main).
 
-When you are done with this exercise, compare your result with the matching solution branch: [`solution/08-skills-playbooks`](https://github.com/rdebokx/coding-agent-academy-software/tree/solution/08-skills-playbooks).
+When you are done with this exercise, compare your result with the matching solution branch: [`solution/08-skills-playbooks`](https://github.com/fresh-minds/coding-agent-academy-software/tree/solution/08-skills-playbooks).
 
 ## Objective
 
