@@ -2,9 +2,9 @@
 
 Use this branch to practice a plan-first feature implementation workflow with a Coding Agent.
 
-For the full project context, baseline application, and general repository instructions, see the [`main` branch](https://github.com/<your-fork-or-origin>/coding-agent-academy-software/tree/main).
+For the full project context, baseline application, and general repository instructions, see the [`main` branch](https://github.com/fresh-minds/coding-agent-academy-software/tree/main).
 
-When you are done, compare your result with the matching solution branch: `solution/10-feature-implementation-plan-first`.
+When you are done, compare your result with the matching solution branch: [`solution/10-feature-implementation-plan-first`](https://github.com/fresh-minds/coding-agent-academy-software/tree/solution/10-feature-implementation-plan-first).
 
 This branch contains the assignment only. It does not contain the implementation of the feature described below.
 
