@@ -15,5 +15,6 @@ The repository contains a small Java training application with:
 
 This exercise branch intentionally does not include a GitHub Actions workflow yet. Your task is to use a Coding Agent to create the repository's first minimal CI pipeline.
 
-## Assignme
+## Solution Branch
+
 - Matching solution: [`solution/09-ci-pipeline-creation`](https://github.com/fresh-minds/coding-agent-academy-software/tree/solution/09-ci-pipeline-creation)
