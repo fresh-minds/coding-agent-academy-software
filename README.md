@@ -31,4 +31,16 @@ At least `solution/03-ide-code-completion` and `solution/06-refactoring` appear 
 
 Literal subagent prompt used:
 
-`Audit the README files across the exercise and solution branches in this repository. Base your task definition only on the following exercise README text, and do not use planning files or assume any extra requirements beyond it.
+```text
+Audit the README files across the exercise and solution branches in this repository. Base your task definition only on the following exercise README text, and do not use planning files or assume any extra requirements beyond it.
+
+Rules:
+- Every `exercise/*` branch README should contain a description of the exercise.
+- Every `solution/*` branch README should contain the original exercise, a brief explanation of the solution, and the literal prompt that was fed to the Coding Agent.
+
+Task:
+- Inspect the root `README.md` in each local `exercise/*` and `solution/*` branch.
+- Report only branches whose README content is missing or incorrect.
+- Do not modify any files.
+- Keep the report concise and branch-specific.
+```
