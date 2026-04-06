@@ -1,6 +1,6 @@
 # Exercise 06: Refactoring
 
-Full project context lives on `main`.
+Full project context lives on [`main`](../../tree/main).
 
 Use a Coding Agent to refactor the duplicated `humanize(String pastryId)` logic in `matcher-api` so both matcher services share one implementation. Start by looking at `RatingIngestionService` and `BaselineDataSeeder`.
 
