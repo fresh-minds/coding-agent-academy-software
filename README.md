@@ -4,7 +4,7 @@ This branch is for practicing Coding Agent-assisted test creation on the existin
 
 ## Full Context
 
-For the full repository baseline and application context, see the [`main` branch](../../tree/main).
+For the full repository baseline and application context, see the [`main` branch](https://github.com/fresh-minds/coding-agent-academy-software/tree/main).
 
 ## Assignment
 
@@ -29,4 +29,4 @@ Use a Coding Agent to add test coverage for existing behavior with a balanced un
 
 ## Solution Branch
 
-See the matching solution on [`solution/04-tests`](../../tree/solution/04-tests).
+See the matching solution on [`solution/04-tests`](https://github.com/fresh-minds/coding-agent-academy-software/tree/solution/04-tests).
