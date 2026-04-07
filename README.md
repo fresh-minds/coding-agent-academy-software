@@ -4,7 +4,7 @@ This branch is for practicing Coding Agent-assisted code review on a prepared fe
 
 ## Full Context
 
-For the full repository baseline and application context, see the [`main` branch](../../tree/main).
+For the full repository baseline and application context, see the [`main` branch](https://github.com/fresh-minds/coding-agent-academy-software/tree/main).
 
 ## Assignment
 
@@ -20,4 +20,4 @@ Review the changes in this branch as if:
 
 ## Solution Branch
 
-See the matching solution on [`solution/05-code-review`](../../tree/solution/05-code-review).
+See the matching solution on [`solution/05-code-review`](https://github.com/fresh-minds/coding-agent-academy-software/tree/solution/05-code-review).
