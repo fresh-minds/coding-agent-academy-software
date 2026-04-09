@@ -1,6 +1,6 @@
 # Exercise 07: Repetitive Tasks
 
-Full project context lives on [`main`](../../tree/main).
+Full project context lives on [`main`](https://github.com/fresh-minds/coding-agent-academy-software/tree/main).
 
 Use a Coding Agent to audit the README files across the exercise and solution branches in this repository.
 
@@ -11,4 +11,4 @@ Audit rules:
 
 Your task is to inspect the relevant branches and produce a report that lists any branches whose README content is missing or incorrect.
 
-Reference solution: [`solution/07-repetitive-tasks`](../../tree/solution/07-repetitive-tasks)
+Reference solution: [`solution/07-repetitive-tasks`](https://github.com/fresh-minds/coding-agent-academy-software/tree/solution/07-repetitive-tasks)
