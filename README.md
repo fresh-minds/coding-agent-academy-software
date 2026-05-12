@@ -6,7 +6,7 @@ This is our FreshMinds Coding Agent Academy. This repository contains a bunch of
 
 This particular repository focuses on the Software Unit, which is why it is written in **Java**. But the good part is: with Coding Agents, it makes less and less of a difference whether you're fluent in Java, Python, .NET, Rust, or any other language.
 
-If you have any questions or suggestions, please reach out to one of the Principals: Christophe Keteleer, Jeroen Rosenberg or Roy de Bokx.
+If you have any questions or suggestions, please reach out to one of the Principals: Jeroen Rosenberg or Roy de Bokx.
 
 ## Assignments
 
@@ -87,3 +87,4 @@ Tech stack at a glance:
 4. Send a request using one of the request collections:
    - IntelliJ HTTP client: `collections/intellij/http-requests.http`
    - Postman collection: `collections/postman/pastry-agent-academy.postman_collection.json`
+ 
